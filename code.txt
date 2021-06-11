@@ -1,0 +1,529 @@
+#include <SPI.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <LiquidCrystal.h>
+
+int buton1pin = A0;
+int buton2pin = A1;
+int buton3pin = A2;
+int buton4pin = A3;
+int buton5pin = A4;
+int buton6pin = A5;
+int buton7pin = 13;
+int pinled1 = 7;
+int pinled2 = 6;
+
+long randNumber2;
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+
+void setup() {
+ pinMode(7,OUTPUT);
+ pinMode(6, OUTPUT);
+ pinMode(buton1pin, INPUT_PULLUP);  
+ pinMode(buton2pin, INPUT_PULLUP); 
+ pinMode(buton3pin, INPUT_PULLUP);  
+ pinMode(buton4pin, INPUT_PULLUP); 
+ pinMode(buton5pin, INPUT_PULLUP);  
+ pinMode(buton6pin, INPUT_PULLUP); 
+ pinMode(buton7pin, INPUT_PULLUP); 
+ lcd.begin(16, 2); 
+
+
+
+ 
+}
+
+void loop() {
+ int musteriBesTl=0;
+ int musteriOnTl=0;
+ int musteriYirmiTl=0;
+ int musteriElliTl=0;
+int musteriYuzTl=0;
+
+int musteriKopuklemeAdedi=0;
+int musteriYikamaAdedi=0;
+int musteriKurulamaAdedi=0;
+int musteriCilalamaAdedi=0;
+
+
+int kopuklemeAdedi=10;
+int yikamaAdedi=10;
+int kurulamaAdedi=10;
+int cilalamaAdedi=10;
+ int count=-1;
+ int besTladedi=0;
+int onTladedi=5;
+int yirmiTladedi=5;
+int elliTladedi=5;
+int yuzTladedi=5;
+
+  tag:
+ count++;
+  int dizi[50];
+  for(int a=0;a<50;a++){
+  
+  dizi[a]= rand()%4+1;
+  
+  }
+  
+ 
+ 
+
+
+ lcd.print("HosGeldiniz..."); 
+ delay(1000);
+ lcd.clear(); 
+ 
+
+ lcd.print("R sayisi");
+       lcd.setCursor(0,1); 
+      lcd.print(dizi[count]); 
+      delay(1000);
+      lcd.clear();
+
+
+ int musteriToplamPara=0;
+
+ 
+lcd.print("Musteri Parasi");
+lcd.setCursor(0,1); 
+lcd.print(musteriToplamPara); 
+delay(1000);
+lcd.clear();
+ 
+
+//kasa paraları
+
+
+
+//KASA PARALARİNİ GÖSTERME
+lcd.print("Kasa Paralari");
+delay(500);
+lcd.clear();
+
+lcd.print("Bes TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(besTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("On TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(onTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Yirmi TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(yirmiTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Elli TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(elliTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Yuz TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(yuzTladedi);
+delay(750);
+lcd.clear();
+
+
+//müsterinin yüklediği
+
+
+//İslemleri gösterme
+lcd.print("Islem Adedi");
+delay(500);
+lcd.clear();
+
+lcd.print("Kopukleme");
+lcd.setCursor(0,1); 
+lcd.print(kopuklemeAdedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Yikama");
+lcd.setCursor(0,1); 
+lcd.print(yikamaAdedi);
+delay(750);
+lcd.clear();
+
+
+lcd.print("Kurulama");
+lcd.setCursor(0,1); 
+lcd.print(kurulamaAdedi);
+delay(750);
+lcd.clear();
+
+
+lcd.print("Cilalama");
+lcd.setCursor(0,1); 
+lcd.print(cilalamaAdedi);
+delay(750);
+lcd.clear();
+
+
+int kopuklemeFiyati=15;
+int yikamaFiyati=10;
+int kurulamaFiyati=5;
+int cilalamaFiyati=50;
+ 
+ lcd.print("Para Giriniz");
+delay(500);
+lcd.clear();
+ 
+ 
+//para yükleme işlemi ve parayı displaye yazdır
+for(;;){
+
+int a=digitalRead(A0);
+int b=digitalRead(A1);
+int c=digitalRead(A2);
+int d=digitalRead(A3);
+int e=digitalRead(A4);
+int f=digitalRead(A5);
+int g=digitalRead(13);
+
+if(a==0){
+  musteriBesTl=musteriBesTl+1;
+  lcd.print("5TL attiniz");
+  delay(500);
+  lcd.clear();
+  
+}
+
+if(b==0){
+  musteriOnTl=musteriOnTl+1;
+   lcd.print("10TL attiniz");
+  delay(500);
+  lcd.clear();
+}
+
+if(c==0){
+  musteriYirmiTl=musteriYirmiTl+1;
+ lcd.print("20TL attiniz");
+  delay(500);
+  lcd.clear();
+}
+
+if(d==0){
+  musteriElliTl=musteriElliTl+1;
+   lcd.print("50TL attiniz");
+  delay(500);
+  lcd.clear();
+}
+
+if(e==0){
+  musteriYuzTl=musteriYuzTl+1;
+   lcd.print("100TL attiniz");
+  delay(500);
+  lcd.clear();
+}
+if(f==0){
+delay(500);
+
+
+  break;
+}
+if(g ==0){
+delay(500);
+  goto tag;
+}
+
+  }
+
+musteriToplamPara=musteriBesTl*5;
+musteriToplamPara=musteriOnTl*10+musteriToplamPara;
+musteriToplamPara=musteriYirmiTl*20+musteriToplamPara;
+musteriToplamPara=musteriElliTl*50+musteriToplamPara;
+musteriToplamPara=musteriYuzTl*100+musteriToplamPara;
+
+lcd.clear(); 
+lcd.print((musteriToplamPara)); 
+lcd.print(("TL ATTINIZ")); 
+delay(2000);
+lcd.clear(); 
+
+tag2:
+
+lcd.print("ISLEMI SECIN"); 
+delay(1000);
+lcd.clear(); 
+for(;;){
+
+int a=digitalRead(A0);
+int b=digitalRead(A1);
+int c=digitalRead(A2);
+int d=digitalRead(A3);
+int e=digitalRead(A4);
+int f=digitalRead(A5);
+int g=digitalRead(13);
+
+if(a==0){
+ musteriKopuklemeAdedi=musteriKopuklemeAdedi+1;
+ lcd.print("KopuklemeSectiniz");
+ delay(500);
+ lcd.clear();
+
+}
+if(b==0){
+   musteriYikamaAdedi=musteriYikamaAdedi+1;
+    lcd.print("YikamaSectiniz");
+    delay(500);
+    lcd.clear();
+  
+}
+if(c==0){
+   musteriKurulamaAdedi=musteriKurulamaAdedi+1;
+    lcd.print("KurulamaSectiniz");
+    delay(500);
+    lcd.clear();
+}
+if(d==0){
+   musteriCilalamaAdedi=musteriCilalamaAdedi+1;;
+    lcd.print("CilalamaSectiniz");
+    delay(500);
+    lcd.clear();
+}
+  if(e ==0){
+  break;
+  }
+
+if(g ==0){
+delay(500);
+  goto tag;
+}
+}
+
+int musteriHizmetToplami=0;
+lcd.print("MusteriHizmetToplam");
+delay(1000);
+lcd.clear();
+musteriHizmetToplami=(kopuklemeFiyati*musteriKopuklemeAdedi)+(yikamaFiyati*musteriYikamaAdedi)+(kurulamaFiyati*musteriKurulamaAdedi)+(cilalamaFiyati*musteriCilalamaAdedi);
+lcd.print(musteriHizmetToplami); 
+delay(2000);
+lcd.clear();
+if(musteriHizmetToplami>musteriToplamPara){
+
+lcd.print("GirilenParadan "); 
+  lcd.setCursor(0,1); 
+  lcd.print("FazlaHizmet"); 
+  delay(1000);
+  lcd.clear();
+goto tag;
+}
+
+if(musteriKopuklemeAdedi>kopuklemeAdedi){
+      lcd.print("Kopukleme");
+       lcd.setCursor(0,1); 
+      lcd.print("Yetersiz"); 
+      delay(1000);
+      lcd.clear();
+  goto tag2;
+      }
+      
+      if(musteriYikamaAdedi>yikamaAdedi){
+      lcd.print("Yikama");
+       lcd.setCursor(0,1); 
+      lcd.print("Yetersiz"); 
+      delay(1000);
+      lcd.clear();
+  goto tag2;
+      }
+      
+      if(musteriKurulamaAdedi>kurulamaAdedi){
+      lcd.print("Kurulama");
+       lcd.setCursor(0,1); 
+      lcd.print("Yetersiz"); 
+      delay(1000);
+      lcd.clear();
+  goto tag2;
+      }
+      
+      if(musteriCilalamaAdedi>cilalamaAdedi){
+      lcd.print("Cilalama");
+       lcd.setCursor(0,1); 
+      lcd.print("Yetersiz"); 
+      delay(1000);
+      lcd.clear();
+  goto tag2;
+      }
+
+      int paraUstu= musteriToplamPara-musteriHizmetToplami;
+   lcd.print("Para Ustu:");
+       lcd.setCursor(0,1); 
+      lcd.print(paraUstu); 
+      delay(1000);
+      lcd.clear();
+
+
+
+
+
+
+   lcd.print("R sayisi");
+       lcd.setCursor(0,1); 
+      lcd.print(dizi[count]); 
+      delay(1000);
+      lcd.clear();
+
+if(dizi[count]==2){
+lcd.print("Para Takildi");
+  digitalWrite(7, HIGH);//kırmızı led yansın
+  delay(2000);
+  lcd.clear();
+  digitalWrite(7, LOW);
+  delay(2000);
+  goto tag;
+}
+
+else{
+    digitalWrite(6, HIGH);//yeşil led yansın
+    delay(2000);
+    digitalWrite(6, LOW);
+  }
+  
+//kasaya para ekle,para üstü hesapla,hizmetleri düşür
+
+
+
+besTladedi=besTladedi+musteriBesTl;
+onTladedi=onTladedi+musteriOnTl;
+yirmiTladedi=yirmiTladedi+musteriYirmiTl;
+elliTladedi=elliTladedi+musteriElliTl;
+yuzTladedi=yuzTladedi+musteriYuzTl;
+
+
+
+
+if(paraUstu/100<=yuzTladedi){
+  yuzTladedi=yuzTladedi-paraUstu/100;
+  paraUstu=paraUstu-((paraUstu/100)*100);
+}
+
+if(paraUstu/50<=elliTladedi){
+  elliTladedi=elliTladedi-paraUstu/50;
+  paraUstu=paraUstu-((paraUstu/50)*50);
+}
+if(paraUstu/20<=yirmiTladedi){
+  yirmiTladedi=yirmiTladedi-paraUstu/20;
+  paraUstu=paraUstu-((paraUstu/20)*20);
+}
+if(paraUstu/10<=onTladedi){
+  onTladedi=onTladedi-paraUstu/10;
+  paraUstu=paraUstu-((paraUstu/10)*10);
+}
+if(paraUstu/5<=besTladedi){
+  besTladedi=besTladedi-paraUstu/5;
+  paraUstu=paraUstu-((paraUstu/5)*5);
+}
+
+
+
+if(paraUstu>0){
+  lcd.print("KASADA YETERLI "); 
+   lcd.setCursor(0,1); 
+ lcd.print("PARA YOK"); 
+  delay(2000);
+  lcd.clear();
+  goto tag;
+}
+else{
+
+lcd.print("para ustu"); 
+ lcd.setCursor(0,1); 
+ lcd.print("veriliyor"); 
+delay(1000);
+lcd.clear();
+}
+
+lcd.print("Kasada Kalan"); 
+ lcd.setCursor(0,1); 
+ lcd.print("Para Miktari"); 
+delay(1000);
+lcd.clear();
+
+
+
+lcd.print("Bes TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(besTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("On TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(onTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Yirmi TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(yirmiTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Elli TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(elliTladedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Yuz TL Adedi:");
+lcd.setCursor(0,1); 
+lcd.print(yuzTladedi);
+delay(750);
+lcd.clear();
+
+//////////////////////////////////
+
+
+kopuklemeAdedi=kopuklemeAdedi-musteriKopuklemeAdedi;
+yikamaAdedi=yikamaAdedi-musteriYikamaAdedi;
+kurulamaAdedi=kurulamaAdedi-musteriKurulamaAdedi;
+cilalamaAdedi=cilalamaAdedi-musteriCilalamaAdedi;
+
+
+lcd.print("Kalan Islemler"); 
+delay(1000);
+lcd.clear();
+
+lcd.print("Kopukleme");
+lcd.setCursor(0,1); 
+lcd.print(kopuklemeAdedi);
+delay(750);
+lcd.clear();
+
+lcd.print("Yikama");
+lcd.setCursor(0,1); 
+lcd.print(yikamaAdedi);
+delay(750);
+lcd.clear();
+
+
+lcd.print("Kurulama");
+lcd.setCursor(0,1); 
+lcd.print(kurulamaAdedi);
+delay(750);
+lcd.clear();
+
+
+lcd.print("Cilalama");
+lcd.setCursor(0,1); 
+lcd.print(cilalamaAdedi);
+delay(750);
+lcd.clear();
+
+lcd.print("bitti"); 
+delay(2000);
+lcd.clear();
+
+
+
+}
